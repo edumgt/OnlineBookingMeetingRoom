@@ -33,6 +33,8 @@ public class User implements UserDetails {
 
     private String phoneNumber;
 
+    private String role;
+
     private ZonedDateTime createdAt;
 
     private ZonedDateTime updatedAt;
@@ -41,17 +43,13 @@ public class User implements UserDetails {
 
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private Role role;
-
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.toString()));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override
