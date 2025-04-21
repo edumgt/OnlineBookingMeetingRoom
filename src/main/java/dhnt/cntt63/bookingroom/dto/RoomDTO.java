@@ -19,6 +19,7 @@ public class RoomDTO {
     private String description;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private String status;
 
     private List<BookingDTO> bookings = new ArrayList<>();
 }

@@ -33,6 +33,7 @@ public class Room {
     private String description;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
+    private String status;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
@@ -47,7 +48,8 @@ public class Room {
                 ", capacity=" + capacity +
                 ", description='" + description + '\'' +
                 ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
+                ", updatedAt=" + updatedAt + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
