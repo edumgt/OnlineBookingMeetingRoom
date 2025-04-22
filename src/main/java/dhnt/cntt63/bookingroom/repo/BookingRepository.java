@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-    Optional<Booking> findBookingConfirmationCode();
+    Optional<Booking> findByBookingConfirmationCode(String confirmationCode);
 
 }

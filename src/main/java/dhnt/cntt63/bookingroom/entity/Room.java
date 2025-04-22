@@ -38,6 +38,47 @@ public class Room {
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
 
+
+    public long getId() {
+        return id;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public String getRoomPhotoURL() {
+        return roomPhotoURL;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
     @Override
     public String toString() {
         return "Room{" +

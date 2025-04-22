@@ -42,6 +42,50 @@ public class Booking {
     @JoinColumn(name = "room_id")
     private Room room;
 
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public ZonedDateTime getStartTime() {
+        return startTime;
+    }
+
+    public ZonedDateTime getEndTime() {
+        return endTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public ZonedDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getBookingConfirmationCode() {
+        return bookingConfirmationCode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
     @Override
     public String toString() {
         return "Booking{" +

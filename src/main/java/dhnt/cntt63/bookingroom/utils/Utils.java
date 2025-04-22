@@ -36,6 +36,7 @@ public class Utils {
         userDTO.setRole(user.getRole());
         userDTO.setCreatedAt(user.getCreatedAt());
         userDTO.setUpdatedAt(user.getUpdatedAt());
+        userDTO.setDeviceInfo(user.getDeviceInfo());
         userDTO.setStatus(user.getStatus());
         return userDTO;
     }
@@ -134,6 +135,7 @@ public class Utils {
         userDTO.setRole(user.getRole());
         userDTO.setCreatedAt(user.getCreatedAt());
         userDTO.setUpdatedAt(user.getUpdatedAt());
+        userDTO.setDeviceInfo(user.getDeviceInfo());
         userDTO.setStatus(user.getStatus());
 
         if(!user.getBookings().isEmpty()){
