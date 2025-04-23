@@ -35,7 +35,7 @@ public class Room {
     private ZonedDateTime updatedAt;
     private String status;
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy     = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
 
 
@@ -43,40 +43,80 @@ public class Room {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getRoomName() {
         return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public String getRoomType() {
         return roomType;
     }
 
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
     public String getRoomPhotoURL() {
         return roomPhotoURL;
+    }
+
+    public void setRoomPhotoURL(String roomPhotoURL) {
+        this.roomPhotoURL = roomPhotoURL;
     }
 
     public Integer getCapacity() {
         return capacity;
     }
 
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public ZonedDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public void setUpdatedAt(ZonedDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getStatus() {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public List<Booking> getBookings() {
         return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 
     @Override
