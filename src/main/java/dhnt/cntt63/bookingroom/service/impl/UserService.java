@@ -93,7 +93,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Respond getAllUser() {
+    public Respond getAllUsers() {
         Respond respond = new Respond();
 
         try {

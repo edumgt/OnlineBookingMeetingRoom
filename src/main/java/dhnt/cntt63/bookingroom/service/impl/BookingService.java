@@ -30,7 +30,7 @@ public class BookingService implements IBookingService {
     @Autowired
     private RoomRepository roomRepository;
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
 
     @Override
