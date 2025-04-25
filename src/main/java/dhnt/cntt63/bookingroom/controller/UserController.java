@@ -20,7 +20,7 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/all")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Respond> getAllUsers(){
         Respond respond = userService.getAllUsers();
         return ResponseEntity.status(respond.getStatusCode()).body(respond);
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/delete/{userId}")
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Respond> deleteUser(@PathVariable("userId") String userId){
         Respond respond = userService.deleteUser(userId);
         return ResponseEntity.status(respond.getStatusCode()).body(respond);
