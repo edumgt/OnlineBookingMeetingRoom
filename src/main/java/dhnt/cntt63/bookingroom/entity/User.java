@@ -33,19 +33,19 @@ public class User implements UserDetails {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "phoneNumber")
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     @Column(name = "role")
     private String role;
 
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private ZonedDateTime createdAt;
 
-    @Column(name = "updatedAt")
+    @Column(name = "update_at")
     private ZonedDateTime updatedAt;
 
-    @Column(name = "deviceInfo")
+    @Column(name = "device_info")
     private String deviceInfo;
 
     @Column(name = "status")

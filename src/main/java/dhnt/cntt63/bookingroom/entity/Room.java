@@ -19,15 +19,15 @@ public class Room {
     private long id;
 
     @NotNull(message="Room name is required!")
-    @Column(name = "roomName")
+    @Column(name = "room_name")
     private String roomName;
 
     @NotNull(message="Room type is required!")
-    @Column(name = "roomType")
+    @Column(name = "room_type")
     private String roomType;
 
     @NotNull(message="Room photo is required!")
-    @Column(name = "roomPhotoURL")
+    @Column(name = "room_photo_url")
     private String roomPhotoURL;
 
     @Min(value=1, message = "Capacity should not be less than 1!")
@@ -36,9 +36,9 @@ public class Room {
 
     @Column(name = "description")
     private String description;
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private ZonedDateTime createdAt;
-    @Column(name = "updatedAt")
+    @Column(name = "updated_at")
     private ZonedDateTime updatedAt;
     @Column(name = "status")
     private String status;

@@ -23,23 +23,23 @@ public class Booking {
     private String title;
 
     @NotNull(message="Start time is required!")
-    @Column(name = "startTime")
+    @Column(name = "start_time")
     private ZonedDateTime startTime;
 
     @Future(message="End time must be in the future!")
-    @Column(name = "endTime")
+    @Column(name = "end_time")
     private ZonedDateTime endTime;
 
     @Column(name = "description")
     private String description;
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private ZonedDateTime createdAt;
-    @Column(name = "updatedAt")
+    @Column(name = "updated_at")
     private ZonedDateTime updatedAt;
     @Column(name = "status")
     private String status;
 
-    @Column(name = "bookingConfirmationCode")
+    @Column(name = "booking_confirmation_code")
     private String bookingConfirmationCode;
 
     @ManyToOne(fetch = FetchType.EAGER)
