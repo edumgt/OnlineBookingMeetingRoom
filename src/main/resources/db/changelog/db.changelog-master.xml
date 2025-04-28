@@ -13,7 +13,7 @@
     </preConditions>
     <createTable tableName="users">
       <column name="id" type="bigint" autoIncrement="true">
-        <constraints primaryKey="true" nullable="false"/>
+        <constraints primaryKey="true"/>
       </column>
       <column name="name" type="varchar(255)">
         <constraints nullable="false"/>
@@ -24,12 +24,12 @@
       <column name="email" type="varchar(255)">
         <constraints nullable="false" unique="true"/>
       </column>
-      <column name="phone_number" type="varchar(50)"/>
+      <column name="phone_number" type="varchar(255)"/>
       <column name="role" type="varchar(255)"/>
-      <column name="created_at" type="timestamp">
-        <constraints nullable="false"/>
+      <column name="created_at" type="timestamp with time zone">
+
       </column>
-      <column name="updated_at" type="timestamp"/>
+      <column name="updated_at" type="timestamp with time zone"/>
       <column name="device_info" type="varchar(255)"/>
       <column name="status" type="varchar(50)"/>
     </createTable>
@@ -44,7 +44,7 @@
     </preConditions>
     <createTable tableName="rooms">
       <column name="id" type="bigint" autoIncrement="true">
-        <constraints primaryKey="true" nullable="false"/>
+        <constraints primaryKey="true"/>
       </column>
       <column name="room_name" type="varchar(255)">
         <constraints nullable="false"/>
@@ -59,8 +59,8 @@
         <constraints nullable="false"/>
       </column>
       <column name="description" type="text"/>
-      <column name="created_at" type="timestamp"/>
-      <column name="updated_at" type="timestamp"/>
+      <column name="created_at" type="timestamp with time zone"/>
+      <column name="updated_at" type="timestamp with time zone"/>
       <column name="status" type="varchar(50)"/>
     </createTable>
   </changeSet>
@@ -74,20 +74,20 @@
     </preConditions>
     <createTable tableName="bookings">
       <column name="id" type="bigint" autoIncrement="true">
-        <constraints primaryKey="true" nullable="false"/>
+        <constraints primaryKey="true"/>
       </column>
       <column name="title" type="varchar(255)">
         <constraints nullable="false"/>
       </column>
-      <column name="start_time" type="timestamp">
+      <column name="start_time" type="timestamp with time zone">
         <constraints nullable="false"/>
       </column>
-      <column name="end_time" type="timestamp">
+      <column name="end_time" type="timestamp with time zone">
         <constraints nullable="false"/>
       </column>
       <column name="description" type="text"/>
-      <column name="created_at" type="timestamp"/>
-      <column name="updated_at" type="timestamp"/>
+      <column name="created_at" type="timestamp with time zone"/>
+      <column name="updated_at" type="timestamp with time zone"/>
       <column name="status" type="varchar(50)"/>
       <column name="booking_confirmation_code" type="varchar(255)"/>
       <column name="user_id" type="bigint">

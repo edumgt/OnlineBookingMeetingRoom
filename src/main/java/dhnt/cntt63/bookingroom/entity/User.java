@@ -42,7 +42,7 @@ public class User implements UserDetails {
     @Column(name = "created_at")
     private ZonedDateTime createdAt;
 
-    @Column(name = "update_at")
+    @Column(name = "updated_at")
     private ZonedDateTime updatedAt;
 
     @Column(name = "device_info")
