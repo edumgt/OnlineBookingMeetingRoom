@@ -22,25 +22,33 @@ public class User implements UserDetails {
     private long id;
 
     @NotBlank(message = "Name is required!")
+    @Column(name = "name")
     private String name;
 
     @NotBlank(message = "Password is required!")
+    @Column(name = "password")
     private String password;
 
     @NotBlank(message = "Email is required!")
-    @Column(unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
+    @Column(name = "role")
     private String role;
 
+    @Column(name = "createdAt")
     private ZonedDateTime createdAt;
 
+    @Column(name = "updatedAt")
     private ZonedDateTime updatedAt;
 
+    @Column(name = "deviceInfo")
     private String deviceInfo;
 
+    @Column(name = "status")
     private String status;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

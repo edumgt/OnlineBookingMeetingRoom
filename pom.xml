@@ -93,6 +93,10 @@
 			<artifactId>aws-java-sdk-s3</artifactId>
 			<version>1.12.782</version>
 		</dependency>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

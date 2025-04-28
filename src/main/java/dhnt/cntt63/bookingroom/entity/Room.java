@@ -19,20 +19,28 @@ public class Room {
     private long id;
 
     @NotNull(message="Room name is required!")
+    @Column(name = "roomName")
     private String roomName;
 
     @NotNull(message="Room type is required!")
+    @Column(name = "roomType")
     private String roomType;
 
     @NotNull(message="Room photo is required!")
+    @Column(name = "roomPhotoURL")
     private String roomPhotoURL;
 
     @Min(value=1, message = "Capacity should not be less than 1!")
+    @Column(name = "capacity")
     private Integer capacity;
 
+    @Column(name = "description")
     private String description;
+    @Column(name = "createdAt")
     private ZonedDateTime createdAt;
+    @Column(name = "updatedAt")
     private ZonedDateTime updatedAt;
+    @Column(name = "status")
     private String status;
 
     @OneToMany(mappedBy     = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
