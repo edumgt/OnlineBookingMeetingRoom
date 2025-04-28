@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -19,13 +19,13 @@ public class BookingDTO {
 
     private String title;
 
-    private ZonedDateTime startTime;
+    private LocalDateTime startTime;
 
-    private ZonedDateTime endTime;
+    private LocalDateTime endTime;
 
     private String description;
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private String status;
 
     private String bookingConfirmationCode;
@@ -42,11 +42,11 @@ public class BookingDTO {
         this.title = title;
     }
 
-    public void setStartTime(ZonedDateTime startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(ZonedDateTime endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
@@ -54,11 +54,11 @@ public class BookingDTO {
         this.description = description;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

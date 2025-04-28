@@ -3,17 +3,21 @@ package dhnt.cntt63.bookingroom.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Data
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -39,11 +43,13 @@ public class User implements UserDetails {
     @Column(name = "role")
     private String role;
 
-    @Column(name = "created_at")
-    private ZonedDateTime createdAt;
+    @Column(name = "created_at", updatable = false)
+    @CreatedDate
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private ZonedDateTime updatedAt;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
     @Column(name = "device_info")
     private String deviceInfo;
@@ -134,19 +140,19 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public ZonedDateTime getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

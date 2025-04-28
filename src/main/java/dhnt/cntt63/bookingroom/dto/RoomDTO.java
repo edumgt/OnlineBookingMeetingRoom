@@ -3,7 +3,7 @@ package dhnt.cntt63.bookingroom.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +17,8 @@ public class RoomDTO {
     private Integer capacity;
 
     private String description;
-    private ZonedDateTime createdAt;
-    private ZonedDateTime updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private String status;
 
     private List<BookingDTO> bookings = new ArrayList<>();
@@ -47,11 +47,11 @@ public class RoomDTO {
         this.description = description;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

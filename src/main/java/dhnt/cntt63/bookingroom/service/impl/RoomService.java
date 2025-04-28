@@ -14,7 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -167,7 +167,7 @@ public class RoomService implements IRoomService {
     }
 
     @Override
-    public Respond getAvailableRoomByDateAndType(ZonedDateTime startTime, ZonedDateTime endTime, String roomType) {
+    public Respond getAvailableRoomByDateAndType(LocalDateTime startTime, LocalDateTime endTime, String roomType) {
         Respond respond = new Respond();
 
         try {

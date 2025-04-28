@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +39,11 @@ public class Room {
     @Column(name = "description")
     private String description;
     @Column(name = "created_at")
-    private ZonedDateTime createdAt;
+    @CreatedDate
+    private LocalDateTime createdAt;
+    @LastModifiedDate
     @Column(name = "updated_at")
-    private ZonedDateTime updatedAt;
+    private LocalDateTime updatedAt;
     @Column(name = "status")
     private String status;
 
@@ -95,19 +99,19 @@ public class Room {
         this.description = description;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public ZonedDateTime getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

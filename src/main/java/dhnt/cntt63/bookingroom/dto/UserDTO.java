@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import dhnt.cntt63.bookingroom.entity.Booking;
 import lombok.Data;
 
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,9 +17,9 @@ public class UserDTO {
     private String phoneNumber;
     private String role;
 
-    private ZonedDateTime createdAt;
+    private LocalDateTime createdAt;
 
-    private ZonedDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     private String deviceInfo;
 
@@ -53,11 +52,11 @@ public class UserDTO {
         this.role = role;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 

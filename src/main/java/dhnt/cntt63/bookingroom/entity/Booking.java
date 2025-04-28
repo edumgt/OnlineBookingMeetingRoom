@@ -5,9 +5,10 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NonNull;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.ZonedDateTime;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -24,18 +25,20 @@ public class Booking {
 
     @NotNull(message="Start time is required!")
     @Column(name = "start_time")
-    private ZonedDateTime startTime;
+    private LocalDateTime startTime;
 
     @Future(message="End time must be in the future!")
     @Column(name = "end_time")
-    private ZonedDateTime endTime;
+    private LocalDateTime endTime;
 
     @Column(name = "description")
     private String description;
     @Column(name = "created_at")
-    private ZonedDateTime createdAt;
+    @CreatedDate
+    private LocalDateTime createdAt;
     @Column(name = "updated_at")
-    private ZonedDateTime updatedAt;
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
     @Column(name = "status")
     private String status;
 
@@ -66,19 +69,19 @@ public class Booking {
         this.title = title;
     }
 
-    public ZonedDateTime getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(ZonedDateTime startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public ZonedDateTime getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(ZonedDateTime endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
@@ -90,19 +93,19 @@ public class Booking {
         this.description = description;
     }
 
-    public ZonedDateTime getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public ZonedDateTime getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
