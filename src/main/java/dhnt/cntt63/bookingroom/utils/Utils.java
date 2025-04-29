@@ -91,7 +91,7 @@ public class Utils {
         return roomDTO;
     }
 
-    public static BookingDTO mapBookingEntityToBookingDTOPlusBookedRooms(Booking booking, boolean mappUser){
+    public static BookingDTO mapBookingEntityToBookingDTOPlusBookedRooms(Booking booking, boolean mapUser){
         BookingDTO bookingDTO = new BookingDTO();
 
         bookingDTO.setId(booking.getId());
@@ -104,7 +104,7 @@ public class Utils {
         bookingDTO.setStatus(booking.getStatus());
         bookingDTO.setBookingConfirmationCode(booking.getBookingConfirmationCode());
 
-        if(mappUser){
+        if(mapUser){
             bookingDTO.setUser(Utils.mapUserEntityToUserDTO(booking.getUser()));
         }
 
