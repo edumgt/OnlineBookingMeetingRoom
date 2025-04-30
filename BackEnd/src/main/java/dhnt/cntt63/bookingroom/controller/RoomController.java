@@ -66,7 +66,7 @@ public class RoomController {
     @GetMapping("/available-rooms-by-date-and-type")
     public ResponseEntity<Respond> getAvailableRoomByDateAndType(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)LocalDateTime endTime,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime,
             @RequestParam(required = false) String roomType
             ){
 

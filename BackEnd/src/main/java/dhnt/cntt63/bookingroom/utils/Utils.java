@@ -8,6 +8,7 @@ import dhnt.cntt63.bookingroom.entity.Room;
 import dhnt.cntt63.bookingroom.entity.User;
 
 import java.security.SecureRandom;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,7 +85,7 @@ public class Utils {
         roomDTO.setUpdatedAt(room.getUpdatedAt());
         roomDTO.setStatus(room.getStatus());
 
-        if(room.getBookings() != null){
+        if(room.getBookings() != null && !room.getBookings().isEmpty()){
             roomDTO.setBookings(room.getBookings().stream().map(Utils::mapBookingEntityToBookingDTO).collect(Collectors.toList()));
         }
 

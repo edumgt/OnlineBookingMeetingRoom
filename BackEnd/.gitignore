@@ -31,4 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-src/main/java/dhnt/cntt63/bookingroom/security/AuditConfig.java
+src/main/resources/application.properties

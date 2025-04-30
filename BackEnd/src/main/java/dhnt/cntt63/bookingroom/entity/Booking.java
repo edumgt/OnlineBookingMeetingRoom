@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -32,12 +34,15 @@ public class Booking {
 
     @Column(name = "description")
     private String description;
-    @Column(name = "created_at")
-    @CreatedDate
+
+    @Column(name = "created_at", updatable = false)
+    @CreationTimestamp
     private LocalDateTime createdAt;
+
     @Column(name = "updated_at")
-    @LastModifiedDate
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
+
     @Column(name = "status")
     private String status;
 

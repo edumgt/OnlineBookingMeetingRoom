@@ -36,7 +36,7 @@ public class UserController {
         return ResponseEntity.status(respond.getStatusCode()).body(respond);
     }
 
-    @GetMapping("/get-logged-id-profile-info/{userId}")
+    @GetMapping("/get-logged-in-profile-info")
     public ResponseEntity<Respond> getLoggedInUserProfile(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
