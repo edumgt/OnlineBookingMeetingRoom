@@ -4,71 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f1de785-f73b-40fd-9930-0f3ca1eea76a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/BookingroomApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/controller/BookingController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/controller/RoomController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/dto/BookingDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/dto/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/dto/Respond.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/dto/RoomDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/dto/UserDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/entity/Booking.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/entity/Room.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/exception/OurException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/repo/BookingRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/repo/RoomRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/repo/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/security/CorsConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/security/JWTAuthFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/service/AwsS3Service.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/service/CustomUserDetailService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/service/impl/BookingService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/service/impl/RoomService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/service/impl/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/service/interfac/IBookingService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/service/interfac/IRoomService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/service/interfac/IUserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/utils/JWTUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/dhnt/cntt63/bookingroom/utils/Utils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/resources/db/changelog/db.changelog-master.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/test/java/dhnt/cntt63/bookingroom/BookingroomApplicationTests.java" beforeDir="false" />
+    <list default="true" id="52607229-42e8-49c6-ac97-d114313d83bb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/controller/RoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/entity/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/entity/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/entity/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/entity/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/service/AwsS3Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/service/AwsS3Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/src/main/java/dhnt/cntt63/bookingroom/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoomPictures/A_Room_01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoomPictures/A_Room_02.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoomPictures/A_Room_03.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoomPictures/Vip_Room_01.pg.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoomPictures/Vip_Room_02.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoomPictures/Vip_Room_03.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Dockerfile" />
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -80,9 +47,10 @@
     </option>
   </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
 }</component>
-  <component name="ProjectId" id="2vrDy2RvayKQSDp99CqSzej5Kcu" />
+  <component name="ProjectId" id="2wRD8rAqD7KB7ZoO16sNa93bkIh" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -100,26 +68,10 @@
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Aki/NTU/K8/ChuyenDeTotNghiep/bookingroom/OnlineBookingMeetingRoom/BackEnd",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Aki\NTU\K8\ChuyenDeTotNghiep\bookingroom\OnlineBookingMeetingRoom\src\main\resources\db" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="dhnt.cntt63.bookingroom.security" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="BookingroomApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="bookingroom" />
@@ -132,48 +84,17 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7f1de785-f73b-40fd-9930-0f3ca1eea76a" name="Changes" comment="" />
-      <created>1744894549663</created>
+      <changelist id="52607229-42e8-49c6-ac97-d114313d83bb" name="Changes" comment="" />
+      <created>1745995338100</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1744894549663</updated>
-      <workItem from="1744894550724" duration="4691000" />
-      <workItem from="1744974431925" duration="2575000" />
-      <workItem from="1744977592678" duration="4623000" />
-      <workItem from="1744982293929" duration="6083000" />
-      <workItem from="1745026889685" duration="615000" />
-      <workItem from="1745124225460" duration="4650000" />
-      <workItem from="1745241390119" duration="5151000" />
-      <workItem from="1745291797381" duration="8344000" />
-      <workItem from="1745384268090" duration="4746000" />
-      <workItem from="1745467027533" duration="6897000" />
-      <workItem from="1745553207953" duration="5512000" />
-      <workItem from="1745643181699" duration="4812000" />
-      <workItem from="1745648445913" duration="1332000" />
-      <workItem from="1745650179174" duration="382000" />
-      <workItem from="1745832817835" duration="6129000" />
-      <workItem from="1745839011609" duration="12316000" />
-      <workItem from="1745891611869" duration="6309000" />
-      <workItem from="1745901433276" duration="1257000" />
-      <workItem from="1745914525201" duration="1692000" />
-      <workItem from="1745916542290" duration="517000" />
-      <workItem from="1745985875377" duration="7022000" />
-      <workItem from="1745995372886" duration="24000" />
+      <updated>1745995338100</updated>
+      <workItem from="1745995342040" duration="29000" />
+      <workItem from="1745996348799" duration="94000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>

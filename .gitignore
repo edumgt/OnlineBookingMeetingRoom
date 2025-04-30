@@ -31,5 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 src/main/resources/application.properties
 BackEnd/src/main/resources/application.properties
+=======
+src/main/java/dhnt/cntt63/bookingroom/security/AuditConfig.java
+>>>>>>> parent of 1f0f5a4 (Rearrange file/folder location for backend and frontend)
