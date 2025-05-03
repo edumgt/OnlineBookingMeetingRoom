@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ApiService from '../../service/ApiService';
-import { format } from 'date-fns';
 
 const RoomSearch = ({ handleSearchResult }) => {
   const [startTime, setstartTime] = useState(null);
@@ -35,6 +34,10 @@ const RoomSearch = ({ handleSearchResult }) => {
   const handleInternalSearch = async () => {
     if (!startTime || !endTime || !roomType) {
       showError('Please select all fields');
+      return false;
+    }
+    if (startTime >= endTime) {
+      showError('Start time must be before end time');
       return false;
     }
     try {

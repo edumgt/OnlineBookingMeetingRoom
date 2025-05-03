@@ -41,6 +41,7 @@ public class AwsS3Service {
             ObjectMetadata metadata = new ObjectMetadata();
 
             metadata.setContentType("image/jpeg");
+            metadata.setContentLength(photo.getSize());
             PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, s2FileName, inputStream, metadata);
             s3Client.putObject(putObjectRequest);
             return "https://" + bucketName + ".s3.amazonaws.com/" + s2FileName;
