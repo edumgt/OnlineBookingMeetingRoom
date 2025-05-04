@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import ApiService from '../../service/ApiService';
 
 const RoomSearch = ({ handleSearchResult }) => {
-  const [startTime, setstartTime] = useState(null);
+  const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [roomType, setRoomType] = useState('');
   const [roomTypes, setRoomTypes] = useState([]);
@@ -69,7 +69,7 @@ const RoomSearch = ({ handleSearchResult }) => {
           <label>Start Time</label>
           <DatePicker
             selected={startTime}
-            onChange={(dateTime) => setstartTime(dateTime)}
+            onChange={(dateTime) => setStartTime(dateTime)}
             showTimeSelect
             dateFormat="yyyy-MM-dd HH:mm"
             timeFormat="HH:mm"

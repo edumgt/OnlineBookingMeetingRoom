@@ -61,7 +61,10 @@ const FindBookingPage = () => {
                     <br />
                     <h3>Room Details</h3>
                     <div>
+                        <p> Room Name: {bookingDetails.room.roomName}</p>
                         <p> Room Type: {bookingDetails.room.roomType}</p>
+                        <p> Description: {bookingDetails.room.description}</p>
+                        <p> Capacity: {bookingDetails.room.capacity}</p>
                         <img src={bookingDetails.room.roomPhotoURL} alt="" sizes="" srcSet="" />
                     </div>
                 </div>

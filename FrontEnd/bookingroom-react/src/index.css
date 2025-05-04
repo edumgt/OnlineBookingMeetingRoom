@@ -594,28 +594,6 @@ button[type="submit"]:hover {
   cursor: pointer;
 }
 
-.guest-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.guest-div {
-  margin-bottom: 10px;
-}
-
-.guest-div label {
-  margin-right: 10px;
-}
-
-.guest-div input[type="number"],
-.guest-div input[type="tel"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
 .confirm-booking {
   background-color: #007F86;
   color: white;
