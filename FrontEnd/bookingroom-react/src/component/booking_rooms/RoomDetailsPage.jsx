@@ -7,13 +7,15 @@ import DatePicker from 'react-datepicker';
 const RoomDetailsPage = () => {
   const navigate = useNavigate(); // Access the navigate function to navigate
   const { roomId } = useParams(); // Get room ID from URL parameters
+  const [roomDetails, setRoomDetails] = useState(null);
   const [roomName, setRoomName] = useState(null);
+  const [roomDescription, setRoomDescription] = useState(null); // State variable for roomDescription
   const [capacity, setCapacity] = useState(null);
   const [roomType, setRoomType] = useState(null);
   const [roomPhotoURL, setRoomPhotoURL] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [title, setTitle] = useState(null); // State variable for title
-  const [description, setDescription] = useState(null); // State variable for description
+  const [bookingDescription, setBookingDescription] = useState(null); // State variable for end time
   const [isLoading, setIsLoading] = useState(true); // Track loading state
   const [error, setError] = useState(null); // Track any errors
   const [startTime, setStartTime] = useState(null); // State variable for start time
@@ -31,13 +33,15 @@ const RoomDetailsPage = () => {
         const response = await ApiService.getRoomById(roomId);
         const room = response.room;
 
-        setRoomName(room.roomName); // <- hoặc room.roomName tùy API
-        setCapacity(room.capacity); // <- nếu dùng
-        setTitle(room.title); // <- nếu cần
-        setDescription(room.description); // <- bạn đang set full object luôn, sai!
-        setRoomType(room.roomType); // <- thêm state này vào dưới
-        setRoomPhotoURL(room.photoURL); // <- thêm state
-        setBookings(room.bookings); // <- thêm state
+        setRoomDetails(response.room);
+
+        setRoomName(room.roomName);
+        setCapacity(room.capacity);
+        setTitle(room.title);
+        setRoomDescription(room.description); 
+        setRoomType(room.roomType);
+        setRoomPhotoURL(room.roomPhotoURL);
+        setBookings(room.bookings); 
 
         
         const userProfile = await ApiService.getUserProfile();
@@ -63,15 +67,6 @@ const RoomDetailsPage = () => {
     }
 
     try {
-      
-
-      // Ensure startTime and endTime are Date objects
-      const startTime = new Date(startTime);
-      const endTime = new Date(endTime);
-
-      // Log the original dates for debugging
-      console.log("Original Start Time:", startTime);
-      console.log("Original End Time:", endTime);
 
       // Convert dates to YYYY-MM-DD format, adjusting for time zone differences
       const formattedStartTime = new Date(startTime.getTime() - (startTime.getTimezoneOffset() * 60000)).toISOString();
@@ -87,7 +82,7 @@ const RoomDetailsPage = () => {
         title: title,
         startTime: formattedStartTime,
         endTime: formattedEndTime,
-        description: description
+        bookingDescription: bookingDescription
       };
       console.log(booking)
       console.log(endTime)
@@ -117,7 +112,7 @@ const RoomDetailsPage = () => {
     return <p className='room-detail-loading'>{error}</p>;
   }
 
-  if (!description) {
+  if (!roomDetails) {
     return <p className='room-detail-loading'>Room not found.</p>;
   }
 
@@ -141,7 +136,7 @@ const RoomDetailsPage = () => {
         <h3>{roomName}</h3>
         <p>Room Type: {roomType}</p>
         <p>Capacity: {capacity}</p>
-        <p>Description: {description}</p>
+        <p>Room Description: {roomDescription}</p>
       </div>
       {bookings && bookings.length > 0 && (
         <div>
@@ -154,7 +149,7 @@ const RoomDetailsPage = () => {
 
                 <span className="booking-text">Start Time: {booking.startTime} </span> <br/>
                 <span className="booking-text">End Time: {booking.endTime}</span> <br/>
-                <span className="booking-text">Description: {booking.description} </span> <br/>
+                <span className="booking-text">Booking Description: {booking.description} </span> <br/>
 
               </li>
             ))}
@@ -163,9 +158,18 @@ const RoomDetailsPage = () => {
       )}
       <div className="booking-info">
         <button className="book-now-button" onClick={() => setShowDatePicker(true)}>Book Now</button>
-        <button className="go-back-button" onClick={() => setShowDatePicker(false)}>Go Back</button>
+        <button className="go-back-button" onClick={() => setShowDatePicker(false)}>Go Back</button> <br/>
         {showDatePicker && (
           <div className="date-picker-container">
+            {/* Nhập Title */}
+            <input
+              type="text"
+              className="detail-search-field"
+              placeholder="Enter Booking Title"
+              value={title || ''}
+              onChange={(e) => setTitle(e.target.value)}
+            /> <br/>
+
             <DatePicker
               className="detail-search-field"
               selected={startTime}
@@ -173,6 +177,7 @@ const RoomDetailsPage = () => {
               selectsStart
               startTime={startTime}
               endTime={endTime}
+              showTimeSelect
               placeholderText="Start Time"
               dateFormat="yyyy-MM-dd HH:mm"
               timeFormat="HH:mm"
@@ -186,16 +191,27 @@ const RoomDetailsPage = () => {
               startTime={startTime}
               endTime={endTime}
               minDate={startTime}
+              showTimeSelect
               placeholderText="End Time"
               dateFormat="yyyy-MM-dd HH:mm"
               timeFormat="HH:mm"
               timeIntervals={15}
-            />
+            /><br/>
+
+            {/* Nhập Booking Description */}
+            <textarea
+              className="detail-search-field"
+              placeholder="Enter Booking Description"
+              rows="4" cols="50"
+              value={bookingDescription || ''}
+              onChange={(e) => setBookingDescription(e.target.value)}
+            ></textarea>
           </div>
         )}
         {(
           <div className="total-price">
             <button className="confirm-booking" onClick={handleConfirmBooking}>Confirm Booking</button>
+            <button className="confirm-booking" onClick={() => navigate('/rooms')}>Cancel Booking</button>
           </div>
         )}
       </div>
