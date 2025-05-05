@@ -52,6 +52,8 @@ const RoomSearch = ({ handleSearchResult }) => {
       if (response.statusCode === 200) {
         if (response.roomList.length === 0) {
           showError('Room not currently available for this date, time and time range on the selected rom type.');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+
           return
         }
         handleSearchResult(response.roomList);

@@ -92,6 +92,8 @@ const RoomDetailsPage = () => {
       if (response.statusCode === 200) {
         setConfirmationCode(response.bookingConfirmationCode); // Set booking confirmation code
         setShowMessage(true); // Show message
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
         // Hide message and navigate to homepage after 5 seconds
         setTimeout(() => {
           setShowMessage(false);

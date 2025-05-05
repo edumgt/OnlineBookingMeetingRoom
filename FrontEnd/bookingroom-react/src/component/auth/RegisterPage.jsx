@@ -41,6 +41,8 @@ function RegisterPage() {
 
             // Check if the response is successful
             if (response.statusCode === 200) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
                 // Clear the form fields after successful registration
                 setFormData({
                     name: '',

@@ -11,12 +11,12 @@ import HomePage from './component/home/HomePage';
 import AllRoomsPage from './component/booking_rooms/AllRoomsPage';
 import RoomDetailsBookingPage from './component/booking_rooms/RoomDetailsPage';
 import FindBookingPage from './component/booking_rooms/FindBookingPage';
-// import AdminPage from './component/admin/AdminPage';
-// import ManageRoomPage from './component/admin/ManageRoomPage';
-// import EditRoomPage from './component/admin/EditRoomPage';
-// import AddRoomPage from './component/admin/AddRoomPage';
-// import ManageBookingsPage from './component/admin/ManageBookingsPage';
-// import EditBookingPage from './component/admin/EditBookingPage';
+import AdminPage from './component/admin/AdminPage';
+import ManageRoomPage from './component/admin/ManageRoomPage';
+import EditRoomPage from './component/admin/EditRoomPage';
+import AddRoomPage from './component/admin/AddRoomPage';
+import ManageBookingsPage from './component/admin/ManageBookingsPage';
+import EditBookingPage from './component/admin/EditBookingPage';
 import ProfilePage from './component/profile/ProfilePage';
 import EditProfilePage from './component/profile/EditProfilePage';
 import { ProtectedRoute, AdminRoute } from './service/guard';
@@ -48,7 +48,7 @@ function App() {
             />
 
             {/* Admin Routes */}
-            {/* <Route path="/admin"
+            <Route path="/admin"
               element={<AdminRoute element={<AdminPage />} />}
             />
             <Route path="/admin/manage-rooms"
@@ -65,7 +65,7 @@ function App() {
             />
             <Route path="/admin/edit-booking/:bookingCode"
               element={<AdminRoute element={<EditBookingPage />} />}
-            /> */}
+            />
 
             {/* Fallback Route */}
             <Route path="*" element={<Navigate to="/login" />} />
