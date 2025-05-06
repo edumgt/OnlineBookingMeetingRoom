@@ -52,11 +52,11 @@ const EditBookingPage = () => {
             {bookingDetails && (
                 <div className="booking-details">
                     <h3>Booking Details</h3>
+                    <h4>Title: {bookingDetails.title}</h4>
                     <p>Confirmation Code: {bookingDetails.bookingConfirmationCode}</p>
-                    <p>Check-in Date: {bookingDetails.checkInDate}</p>
-                    <p>Check-out Date: {bookingDetails.checkOutDate}</p>
-                    <p>Num Of Adults: {bookingDetails.numOfAdults}</p>
-                    <p>Num Of Children: {bookingDetails.numOfChildren}</p>
+                    <p>Start Time: {bookingDetails.startTime}</p>
+                    <p>End Time: {bookingDetails.endTime}</p>
+                    <p>Description: {bookingDetails.description}</p>
                     <p>Guest Email: {bookingDetails.guestEmail}</p>
 
                     <br />
@@ -74,13 +74,14 @@ const EditBookingPage = () => {
                     <br />
                     <h3>Room Details</h3>
                     <div>
+                        <p> Room Name: {bookingDetails.room.roomName}</p>
                         <p> Room Type: {bookingDetails.room.roomType}</p>
-                        <p> Room Price: ${bookingDetails.room.roomPrice}</p>
-                        <p> Room Description: {bookingDetails.room.roomDescription}</p>
-                        <img src={bookingDetails.room.roomPhotoUrl} alt="" sizes="" srcSet="" />
+                        <p> Description: {bookingDetails.room.description}</p>
+                        <p> Capacity: {bookingDetails.room.capacity}</p>
+                        <img src={bookingDetails.room.roomPhotoURL} alt="Room" className="room-photo" srcSet="" />
                     </div>
                     <button
-                        className="acheive-booking"
+                        className="achieve-booking"
                         onClick={() => achieveBooking(bookingDetails.id)}>Achieve Booking
                     </button>
                 </div>

@@ -71,10 +71,11 @@ const ManageBookingsPage = () => {
             <div className="booking-results">
                 {currentBookings.map((booking) => (
                     <div key={booking.id} className="booking-result-item">
+                        <h4><strong>Title:</strong> {booking.title}</h4>
                         <p><strong>Booking Code:</strong> {booking.bookingConfirmationCode}</p>
-                        <p><strong>Check In Date:</strong> {booking.checkInDate}</p>
-                        <p><strong>Check out Date:</strong> {booking.checkOutDate}</p>
-                        <p><strong>Total Guests:</strong> {booking.totalNumOfGuest}</p>
+                        <p><strong>Start Time:</strong> {booking.startTime}</p>
+                        <p><strong>End Time:</strong> {booking.endTime}</p>
+                        <p><strong>Description:</strong> {booking.description}</p>
                         <button
                             className="edit-room-button"
                             onClick={() => navigate(`/admin/edit-booking/${booking.bookingConfirmationCode}`)}
