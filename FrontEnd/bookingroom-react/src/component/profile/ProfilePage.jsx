@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
+import Modal from 'react-modal';
 
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -25,6 +28,7 @@ const ProfilePage = () => {
 
     const handleLogout = () => {
         ApiService.logout();
+        setShowLogoutModal(false);
         navigate('/home');
     };
 
@@ -37,7 +41,7 @@ const ProfilePage = () => {
             {user && <h2>Welcome, {user.name}</h2>}
             <div className="profile-actions">
                 <button className="edit-profile-button" onClick={handleEditProfile}>Edit Profile</button>
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
+                <button className="logout-button" onClick={() => setShowLogoutModal(true)}>Logout</button>
             </div>
             {error && <p className="error-message">{error}</p>}
             {user && (
@@ -47,6 +51,22 @@ const ProfilePage = () => {
                     <p><strong>Phone Number:</strong> {user.phoneNumber}</p>
                 </div>
             )}
+
+            {/* Modal Confirm */}
+            <Modal
+                isOpen={showLogoutModal}
+                onRequestClose={() => setShowLogoutModal(false)}
+                contentLabel="Confirm Logout"
+                className="modal-content"
+                overlayClassName="modal-overlay"
+            >
+                <h3>Are you sure you want to logout?</h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                    <button onClick={() => setShowLogoutModal(false)}>Cancel</button>
+                    <button onClick={handleLogout}>Logout</button>
+                </div>
+            </Modal>
+
             <div className="bookings-section">
                 <h3>My Booking History</h3>
                 <div className="booking-list">

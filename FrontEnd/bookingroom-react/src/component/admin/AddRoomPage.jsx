@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AddRoomPage = () => {
@@ -14,14 +16,8 @@ const AddRoomPage = () => {
     });
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
-    const [roomName, setRoomName] = useState(null);
     const [roomTypes, setRoomTypes] = useState([]);
     const [newRoomType, setNewRoomType] = useState(false);
-    const [capacity, setCapacity] = useState(null);
-    const [description, setDescription] = useState(null);
-
 
     useEffect(() => {
         const fetchRoomTypes = async () => {
@@ -29,7 +25,7 @@ const AddRoomPage = () => {
                 const types = await ApiService.getRoomTypes();
                 setRoomTypes(types);
             } catch (error) {
-                console.error('Error fetching room types:', error.message);
+                toast.error('Error fetching room types:', error.message);
             }
         };
         fetchRoomTypes();
@@ -71,8 +67,7 @@ const AddRoomPage = () => {
 
     const addRoom = async () => {
         if (!roomDetails.roomName || !roomDetails.roomType || !roomDetails.capacity ||!roomDetails.description) {
-            setError('All room details must be provided.');
-            setTimeout(() => setError(''), 5000);
+            toast.error('All room details must be provided.');
             return;
         }
 
@@ -93,25 +88,23 @@ const AddRoomPage = () => {
 
             const result = await ApiService.addRoom(formData);
             if (result.statusCode === 200) {
-                setSuccess('Room Added successfully.');
+                toast.success('Room Added successfully.');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 
                 setTimeout(() => {
-                    setSuccess('');
+                    toast.success('');
                     navigate('/admin/manage-rooms');
                 }, 3000);
             }
         } catch (error) {
-            setError(error.response?.data?.message || error.message);
-            setTimeout(() => setError(''), 5000);
+            toast.error(error.response?.data?.message || error.message);
         }
     };
 
     return (
         <div className="edit-room-container">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2>Add New Room</h2>
-            {error && <p className="error-message">{error}</p>}
-            {success && <p className="success-message">{success}</p>}
             <div className="edit-room-form">
                 <div className="form-group">
                     {preview && (

@@ -1,48 +1,56 @@
 import React, { useState } from "react";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ApiService from "../../service/ApiService";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from "react-spinners";
 
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false); 
     const navigate = useNavigate();
     const location = useLocation();
+    const [isLoading, setIsLoading] = useState(false);
 
-  const from = location.state?.from?.pathname || '/home';
-
+    const from = location.state?.from?.pathname || '/home';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!email || !password) {
-            setError('Please fill in all fields.');
-            setTimeout(() => setError(''), 5000);
+            toast.error('Please fill in all fields.');
             return;
         }
+        setIsLoading(true);
 
         try {
-            const response = await ApiService.loginUser({email, password});
+            const response = await ApiService.loginUser({ email, password });
             if (response.statusCode === 200) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('role', response.role);
-                navigate(from, { replace: true });
+
+                toast.success('Login successful!');
+                setTimeout(() => {
+                    navigate(from, { replace: true });
+                }, 1500);
             }
         } catch (error) {
-            setError(error.response?.data?.message || error.message);
-            setTimeout(() => setError(''), 5000);
+            toast.error(error.response?.data?.message || error.message);
+        } finally{
+            setIsLoading(false); 
         }
     };
 
     return (
         <div className="auth-container">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2>Login</h2>
-            {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Email: </label>
+                    <label>Email:</label>
                     <input
                         type="email"
                         value={email}
@@ -51,17 +59,31 @@ function LoginPage() {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Password: </label>
+                    <label>Password:</label>
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{
+                            paddingRight: "557px",
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                            padding: 0,
+                        }}
+                    >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" disabled={isLoading}>
+                {isLoading ? <ClipLoader size={20} color="#fff" /> : "Login"}
+            </button>
             </form>
-
             <p className="register-link">
                 Don't have an account? <a href="/register">Register</a>
             </p>

@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import ApiService from '../../service/ApiService'; // Assuming your service is in a file called ApiService.js
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FindBookingPage = () => {
     const [confirmationCode, setConfirmationCode] = useState(''); // State variable for confirmation code
     const [bookingDetails, setBookingDetails] = useState(null); // State variable for booking details
-    const [error, setError] = useState(null); // Track any errors
 
     const handleSearch = async () => {
         if (!confirmationCode.trim()) {
-            setError("Please Enter a booking confirmation code");
-            setTimeout(() => setError(''), 5000);
+            toast.error("Please Enter a booking confirmation code");
             return;
         }
         try {
             // Call API to get booking details
             const response = await ApiService.getBookingByConfirmationCode(confirmationCode);
             setBookingDetails(response.booking);
-            setError(null); // Clear error if successful
+            toast.success('Found booking');
         } catch (error) {
-            setError(error.response?.data?.message || error.message);
-            setTimeout(() => setError(''), 5000);
+            toast.error(error.response?.data?.message || error.message);
         }
     };
 
     return (
         <div className="find-booking-page">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2>Find Booking</h2>
             <div className="search-container">
                 <input
@@ -36,7 +36,6 @@ const FindBookingPage = () => {
                 />
                 <button onClick={handleSearch}>Find</button>
             </div>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
             {bookingDetails && (
                 <div className="booking-details">
                     <h3>Booking Details</h3>

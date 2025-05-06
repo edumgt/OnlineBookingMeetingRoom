@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService'; // Assuming your service is in a file called ApiService.js
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditBookingPage = () => {
     const navigate = useNavigate();
     const { bookingCode } = useParams();
     const [bookingDetails, setBookingDetails] = useState(null); // State variable for booking details
-    const [error, setError] = useState(null); // Track any errors
-    const [success, setSuccessMessage] = useState(null); // Track any errors
 
 
 
@@ -17,7 +17,7 @@ const EditBookingPage = () => {
                 const response = await ApiService.getBookingByConfirmationCode(bookingCode);
                 setBookingDetails(response.booking);
             } catch (error) {
-                setError(error.message);
+                toast.error(error.message);
             }
         };
 
@@ -33,25 +33,22 @@ const EditBookingPage = () => {
         try {
             const response = await ApiService.cancelBooking(bookingId);
             if (response.statusCode === 200) {
-                setSuccessMessage("The booking was Successfully Achieved")
+                toast.success("The booking was Successfully Achieved")
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 
                 setTimeout(() => {
-                    setSuccessMessage('');
                     navigate('/admin/manage-bookings');
                 }, 3000);
             }
         } catch (error) {
-            setError(error.response?.data?.message || error.message);
-            setTimeout(() => setError(''), 5000);
+            toast.error(error.response?.data?.message || error.message);
         }
     };
 
     return (
         <div className="find-booking-page">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2>Booking Detail</h2>
-            {error && <p className='error-message'>{error}</p>}
-            {success && <p className='success-message'>{success}</p>}
             {bookingDetails && (
                 <div className="booking-details">
                     <h3>Booking Details</h3>

@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import ApiService from '../../service/ApiService';
 import { useNavigate } from 'react-router-dom';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from "react-spinners";
 
 function RegisterPage() {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -12,61 +18,59 @@ function RegisterPage() {
         phoneNumber: ''
     });
 
-    const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    const isStrongPassword = (password) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+        return regex.test(password);
+    };
+
     const validateForm = () => {
         const { name, email, password, phoneNumber } = formData;
-        if (!name || !email || !password || !phoneNumber) {
-            return false;
-        }
-        return true;
+        return name && email && password && phoneNumber;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!validateForm()) {
-            setErrorMessage('Please fill all the fields.');
-            setTimeout(() => setErrorMessage(''), 5000);
+            toast.error('Please fill all the fields.');
             return;
         }
+
+        if (!isStrongPassword(formData.password)) {
+            toast.error('Password must be at least 8 characters, include 1 uppercase, 1 lowercase, and 1 special character.');
+            return;
+        }
+        setIsLoading(true);
+
         try {
-            // Call the register method from ApiService
             const response = await ApiService.registerUser(formData);
-
-            // Check if the response is successful
             if (response.statusCode === 200) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                // Clear the form fields after successful registration
+                toast.success('User registered successfully!');
                 setFormData({
                     name: '',
                     email: '',
                     password: '',
                     phoneNumber: ''
                 });
-                setSuccessMessage('User registered successfully');
                 setTimeout(() => {
-                    setSuccessMessage('');
                     navigate('/');
-                }, 3000);
+                }, 2000);
             }
-        }
-         catch (error) {
-            setErrorMessage(error.response?.data?.message || error.message);
-            setTimeout(() => setErrorMessage(''), 5000);
+        } catch (error) {
+            toast.error(error.response?.data?.message || error.message);
+        } finally {
+            setIsLoading(false); // 👈 End
         }
     };
 
     return (
         <div className="auth-container">
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2>Sign Up</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -83,9 +87,33 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>Password:</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleInputChange} required />
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        required
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{
+                            paddingRight: "557px",
+                            background: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                            padding: 0,
+                        }}
+                    >
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                    <small style={{ fontSize: "12px", color: "#888" }}>
+                        Must be at least 8 characters, include uppercase, lowercase, and special character.
+                    </small>
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit" disabled={isLoading}>
+                    {isLoading ? <ClipLoader size={20} color="#fff" /> : "Register"}
+                </button>
             </form>
             <p className="register-link">
                 Already have an account? <a href="/login">Login</a>

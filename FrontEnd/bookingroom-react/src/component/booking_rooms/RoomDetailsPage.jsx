@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService'; // Assuming your service is in a file called ApiService.js
 import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RoomDetailsPage = () => {
   const navigate = useNavigate(); // Access the navigate function to navigate
@@ -17,14 +18,11 @@ const RoomDetailsPage = () => {
   const [title, setTitle] = useState(null); // State variable for title
   const [bookingDescription, setBookingDescription] = useState(null); // State variable for end time
   const [isLoading, setIsLoading] = useState(true); // Track loading state
-  const [error, setError] = useState(null); // Track any errors
   const [startTime, setStartTime] = useState(null); // State variable for start time
   const [endTime, setEndTime] = useState(null); // State variable for end time
   const [showDatePicker, setShowDatePicker] = useState(false); // State variable to control date picker visibility
   const [userId, setUserId] = useState(''); // Set user id
-  const [showMessage, setShowMessage] = useState(false); // State variable to control message visibility
   const [confirmationCode, setConfirmationCode] = useState(''); // State variable for booking confirmation code
-  const [errorMessage, setErrorMessage] = useState(''); // State variable for error message
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +45,7 @@ const RoomDetailsPage = () => {
         const userProfile = await ApiService.getUserProfile();
         setUserId(userProfile.user.id);
       } catch (error) {
-        setError(error.response?.data?.message || error.message);
+        toast.error(error.response?.data?.message || error.message);
       } finally {
         setIsLoading(false); // Set loading state to false after fetching or error
       }
@@ -61,8 +59,8 @@ const RoomDetailsPage = () => {
 
     // Check if check-in and check-out dates are selected
     if (!startTime || !endTime) {
-      setErrorMessage('Please select check-in and check-out dates.');
-      setTimeout(() => setErrorMessage(''), 5000); // Clear error message after 5 seconds
+      toast.error('Please select check-in and check-out dates.');
+      setTimeout(() => toast.error(''), 5000); // Clear error message after 5 seconds
       return;
     }
 
@@ -91,27 +89,21 @@ const RoomDetailsPage = () => {
       const response = await ApiService.bookRoom(roomId, userId, booking);
       if (response.statusCode === 200) {
         setConfirmationCode(response.bookingConfirmationCode); // Set booking confirmation code
-        setShowMessage(true); // Show message
+        toast.success("Booking successful! Confirmation code: ${response.bookingConfirmationCode}. An SMS and email of your booking . An SMS and email of your booking details have been sent to you.")
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
         // Hide message and navigate to homepage after 5 seconds
         setTimeout(() => {
-          setShowMessage(false);
           navigate('/rooms'); // Navigate to rooms
         }, 10000);
       }
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || error.message);
-      setTimeout(() => setErrorMessage(''), 5000); // Clear error message after 5 seconds
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 
   if (isLoading) {
     return <p className='room-detail-loading'>Loading room details...</p>;
-  }
-
-  if (error) {
-    return <p className='room-detail-loading'>{error}</p>;
   }
 
   if (!roomDetails) {
@@ -121,16 +113,8 @@ const RoomDetailsPage = () => {
 
   return (
     <div className="room-details-booking">
-      {showMessage && (
-        <p className="booking-success-message">
-          Booking successful! Confirmation code: {confirmationCode}. An SMS and email of your booking details have been sent to you.
-        </p>
-      )}
-      {errorMessage && (
-        <p className="error-message">
-          {errorMessage}
-        </p>
-      )}
+      <ToastContainer position="top-right" autoClose={5000} />
+
       <h2>Room Details</h2>
       <br />
       <img src={roomPhotoURL} alt={roomType} className="room-details-image" />

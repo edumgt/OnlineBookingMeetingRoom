@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root'); // 👈 Set root element for accessibility
 
 function Navbar() {
     const isAuthenticated = ApiService.isAuthenticated();
@@ -8,12 +11,12 @@ function Navbar() {
     const isUser = ApiService.isUser();
     const navigate = useNavigate();
 
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
+
     const handleLogout = () => {
-        const isLogout = window.confirm('Are you sure you want to logout this user?');
-        if (isLogout) {
-            ApiService.logout();
-            navigate('/home');
-        }
+        ApiService.logout();
+        setShowLogoutModal(false);
+        navigate('/home');
     };
 
     return (
@@ -31,8 +34,24 @@ function Navbar() {
 
                 {!isAuthenticated &&<li><NavLink to="/login" activeclassname="active">Login</NavLink></li>}
                 {!isAuthenticated &&<li><NavLink to="/register" activeclassname="active">Register</NavLink></li>}
-                {isAuthenticated && <li onClick={handleLogout}>Logout</li>}
+                {isAuthenticated && <li onClick={() => setShowLogoutModal(true)}>Logout</li>}
             </ul>
+
+            {/* Modal Confirm */}
+            <Modal
+                isOpen={showLogoutModal}
+                onRequestClose={() => setShowLogoutModal(false)}
+                contentLabel="Confirm Logout"
+                className="modal-content"
+                overlayClassName="modal-overlay"
+            >
+                <h3>Are you sure you want to logout?</h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+                    <button onClick={() => setShowLogoutModal(false)}>Cancel</button>
+                    <button onClick={handleLogout}>Logout</button>
+                </div>
+            </Modal>
+
         </nav>
     );
 }

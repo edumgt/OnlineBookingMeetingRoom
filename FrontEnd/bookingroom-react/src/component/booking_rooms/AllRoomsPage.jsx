@@ -3,6 +3,8 @@ import ApiService from '../../service/ApiService';
 import Pagination from '../common/Pagination';
 import RoomResult from '../common/RoomResult';
 import RoomSearch from '../common/RoomSearch';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -29,7 +31,7 @@ const AllRoomsPage = () => {
         setRooms(allRooms);
         setFilteredRooms(allRooms);
       } catch (error) {
-        console.error('Error fetching rooms:', error.message);
+        toast.error('Error fetching rooms:', error.message);
       }
     };
 
@@ -38,7 +40,7 @@ const AllRoomsPage = () => {
         const types = await ApiService.getRoomTypes();
         setRoomTypes(types);
       } catch (error) {
-        console.error('Error fetching room types:', error.message);
+        toast.error('Error fetching room types:', error.message);
       }
     };
 
@@ -71,6 +73,7 @@ const AllRoomsPage = () => {
 
   return (
     <div className='all-rooms'>
+      <ToastContainer position="top-right" autoClose={5000} />
       <h2>All Rooms</h2>
       <div className='all-room-filter-div'>
         <label>Filter by Room Type:</label>

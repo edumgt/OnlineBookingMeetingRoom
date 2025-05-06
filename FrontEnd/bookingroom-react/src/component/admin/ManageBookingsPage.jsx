@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
 import Pagination from '../common/Pagination';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ManageBookingsPage = () => {
     const [bookings, setBookings] = useState([]);
@@ -19,7 +21,7 @@ const ManageBookingsPage = () => {
                 setBookings(allBookings);
                 setFilteredBookings(allBookings);
             } catch (error) {
-                console.error('Error fetching bookings:', error.message);
+                toast.error('Error fetching bookings:', error.message);
             }
         };
 
@@ -54,6 +56,7 @@ const ManageBookingsPage = () => {
 
     return (
         <div className='bookings-container'>
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2>All Bookings</h2>
             <div className='search-div'>
                 <label>Filter by Booking Number:</label>

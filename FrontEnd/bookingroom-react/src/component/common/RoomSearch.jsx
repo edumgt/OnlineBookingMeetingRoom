@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ApiService from '../../service/ApiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const RoomSearch = ({ handleSearchResult }) => {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [roomType, setRoomType] = useState('');
   const [roomTypes, setRoomTypes] = useState([]);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchRoomTypes = async () => {
@@ -16,28 +17,20 @@ const RoomSearch = ({ handleSearchResult }) => {
         const types = await ApiService.getRoomTypes();
         setRoomTypes(types);
       } catch (error) {
-        console.error('Error fetching room types:', error.message);
+        toast.error('Error fetching room types:'+ error.message);
       }
     };
     fetchRoomTypes();
   }, []);
 
-  /**This methods is going to be used to show errors */
-  const showError = (message, timeout = 5000) => {
-    setError(message);
-    setTimeout(() => {
-      setError('');
-    }, timeout);
-  };
-
-  /**THis is going to be used to fetch avaailabe rooms from database base on seach data that'll be passed in */
+  /**THis is going to be used to fetch available rooms from database base on search data that'll be passed in */
   const handleInternalSearch = async () => {
     if (!startTime || !endTime || !roomType) {
-      showError('Please select all fields');
+      toast.error('Please select all fields');
       return false;
     }
     if (startTime >= endTime) {
-      showError('Start time must be before end time');
+      toast.error('Start time must be before end time');
       return false;
     }
     try {
@@ -51,21 +44,21 @@ const RoomSearch = ({ handleSearchResult }) => {
       // Check if the response is successful
       if (response.statusCode === 200) {
         if (response.roomList.length === 0) {
-          showError('Room not currently available for this date, time and time range on the selected rom type.');
+          toast.error('Room not currently available for this date, time and time range on the selected rom type.');
           window.scrollTo({ top: 0, behavior: 'smooth' });
 
           return
         }
         handleSearchResult(response.roomList);
-        setError('');
       }
     } catch (error) {
-      showError("Unown error occured: " + error.response.data.message);
+      toast.error("Unknown error occurred: " + error.response.data.message);
     }
   };
 
   return (
     <section>
+      <ToastContainer position="top-right" autoClose={5000} />
       <div className="search-container">
         <div className="search-field">
           <label>Start Time</label>
@@ -109,7 +102,6 @@ const RoomSearch = ({ handleSearchResult }) => {
           Search Rooms
         </button>
       </div>
-      {error && <p className="error-message">{error}</p>}
     </section>
   );
 };

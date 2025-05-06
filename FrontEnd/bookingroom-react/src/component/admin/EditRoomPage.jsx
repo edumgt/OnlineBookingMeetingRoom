@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditRoomPage = () => {
     const { roomId } = useParams();
@@ -14,8 +16,6 @@ const EditRoomPage = () => {
     });
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
 
     useEffect(() => {
         const fetchRoomDetails = async () => {
@@ -29,7 +29,7 @@ const EditRoomPage = () => {
                     description: response.room.description,
                 });
             } catch (error) {
-                setError(error.response?.data?.message || error.message);
+                toast.error(error.response?.data?.message || error.message);
             }
         };
         fetchRoomDetails();
@@ -69,18 +69,15 @@ const EditRoomPage = () => {
 
             const result = await ApiService.updateRoom(roomId, formData);
             if (result.statusCode === 200) {
-                setSuccess('Room updated successfully.');
+                toast.success('Room updated successfully.');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
                 setTimeout(() => {
-                    setSuccess('');
                     navigate('/admin/manage-rooms');
                 }, 3000);
             }
-            setTimeout(() => setSuccess(''), 5000);
         } catch (error) {
-            setError(error.response?.data?.message || error.message);
-            setTimeout(() => setError(''), 5000);
+            toast.error(error.response?.data?.message || error.message);
         }
     };
 
@@ -89,26 +86,23 @@ const EditRoomPage = () => {
             try {
                 const result = await ApiService.deleteRoom(roomId);
                 if (result.statusCode === 200) {
-                    setSuccess('Room Deleted successfully.');
+                    toast.success('Room Deleted successfully.');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     
                     setTimeout(() => {
-                        setSuccess('');
                         navigate('/admin/manage-rooms');
                     }, 3000);
                 }
             } catch (error) {
-                setError(error.response?.data?.message || error.message);
-                setTimeout(() => setError(''), 5000);
+                toast.error(error.response?.data?.message || error.message);
             }
         }
     };
 
     return (
         <div className="edit-room-container">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2>Edit Room</h2>
-            {error && <p className="error-message">{error}</p>}
-            {success && <p className="success-message">{success}</p>}
             <div className="edit-room-form">
                 <div className="form-group">
                     {preview ? (
