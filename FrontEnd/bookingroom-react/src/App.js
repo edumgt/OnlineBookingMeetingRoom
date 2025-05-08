@@ -12,6 +12,8 @@ import AllRoomsPage from './component/booking_rooms/AllRoomsPage';
 import RoomDetailsBookingPage from './component/booking_rooms/RoomDetailsPage';
 import FindBookingPage from './component/booking_rooms/FindBookingPage';
 import AdminPage from './component/admin/AdminPage';
+import ManageUserPage from './component/admin/ManageUserPage';
+import EditUserPage from './component/admin/EditUserPage';
 import ManageRoomPage from './component/admin/ManageRoomPage';
 import EditRoomPage from './component/admin/EditRoomPage';
 import AddRoomPage from './component/admin/AddRoomPage';
@@ -19,6 +21,7 @@ import ManageBookingsPage from './component/admin/ManageBookingsPage';
 import EditBookingPage from './component/admin/EditBookingPage';
 import ProfilePage from './component/profile/ProfilePage';
 import EditProfilePage from './component/profile/EditProfilePage';
+import Calendar from './component/home/Calendar';
 import { ProtectedRoute, AdminRoute } from './service/guard';
 
 function App() {
@@ -46,10 +49,19 @@ function App() {
             <Route path="/edit-profile"
               element={<ProtectedRoute element={<EditProfilePage />} />}
             />
+            <Route path='/calendar'
+              element={<ProtectedRoute element={<Calendar/>} />} 
+            />
 
             {/* Admin Routes */}
             <Route path="/admin"
               element={<AdminRoute element={<AdminPage />} />}
+            />
+            <Route path="/admin/manage-users"
+              element={<AdminRoute element={<ManageUserPage />} />}
+            />
+            <Route path="/admin/edit-user/:userId"
+              element={<AdminRoute element={<EditUserPage />} />}
             />
             <Route path="/admin/manage-rooms"
               element={<AdminRoute element={<ManageRoomPage />} />}

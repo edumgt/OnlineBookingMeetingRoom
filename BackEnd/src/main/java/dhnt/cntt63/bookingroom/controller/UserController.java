@@ -50,4 +50,19 @@ public class UserController {
         Respond respond = userService.getUserBookingHistory(userId);
         return ResponseEntity.status(respond.getStatusCode()).body(respond);
     }
+
+    @PutMapping("/update-user/{userId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Respond> updateUser(
+            @PathVariable("userId") Long userId,
+            @RequestParam(value = "name", required = false)String name,
+            @RequestParam(value = "password", required = false)String password,
+            @RequestParam(value = "email", required = false) String email,
+            @RequestParam(value = "phoneNummber", required = false)String phoneNumber,
+            @RequestParam(value = "role", required = false)String role,
+            @RequestParam(value = "deviceInfo", required = false)String deviceInfo
+            ){
+        Respond respond = userService.updateUser(userId, name, password, email, phoneNumber, role, deviceInfo);
+        return ResponseEntity.status(respond.getStatusCode()).body(respond);
+    }
 }

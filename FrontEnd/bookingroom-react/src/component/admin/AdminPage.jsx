@@ -26,6 +26,9 @@ const AdminPage = () => {
             <ToastContainer position="top-right" autoClose={5000} />
             <h1 className="welcome-message">Welcome, {adminName}</h1>
             <div className="admin-actions">
+                <button className="admin-button" onClick={() => navigate('/admin/manage-users')}>
+                    Manage Users
+                </button>
                 <button className="admin-button" onClick={() => navigate('/admin/manage-rooms')}>
                     Manage Rooms
                 </button>

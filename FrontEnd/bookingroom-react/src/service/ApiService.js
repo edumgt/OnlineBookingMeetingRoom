@@ -61,6 +61,16 @@ export default class ApiService {
         return response.data
     }
 
+        /* This updates a user */
+        static async updateUser(userId, formData) {
+            const result = await axios.put(`${this.BASE_URL}/users/edit-user/${userId}`, formData, {
+                headers: {
+                    ...this.getHeader(),
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            return result.data;
+        }
 
     /* This is to delete a user */
     static async deleteUser(userId) {

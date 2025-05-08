@@ -12,6 +12,7 @@ import dhnt.cntt63.bookingroom.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,46 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public Respond updateUser(Long userId, String name, String password, String email, String phoneNumber, String role, String deviceInfo) {
+
+        Respond respond = new Respond();
+
+        try {
+            User user = userRepository.findById(userId).orElseThrow(() -> new OurException("User Not Found!"));
+
+            if(userRepository.existsByEmail(email)){
+                throw new OurException(email + " " + "Already Exists");
+            }
+
+            if(name != null) user.setName(name);
+            if(password != null) user.setPassword(passwordEncoder.encode(password));
+            if(email != null) user.setEmail(email);
+            if(phoneNumber != null) user.setPhoneNumber(phoneNumber);
+            if(role != null) user.setRole(role);
+            if(deviceInfo != null) user.setDeviceInfo(deviceInfo);
+
+
+            User updatedUser = userRepository.save(user);
+            UserDTO userDTO = Utils.mapUserEntityToUserDTO(updatedUser);
+
+            respond.setStatusCode(200);
+            respond.setMessage("Successful");
+            respond.setUser(userDTO);
+
+        } catch (OurException e) {
+            respond.setStatusCode(404);
+            respond.setMessage(e.getMessage());
+
+        }catch (Exception e){
+            respond.setStatusCode(500);
+            respond.setMessage("Error Editing a user" + e.getMessage());
+
+        }
+        return respond;
+    }
+
+
+    @Override
     public Respond login(LoginRequest loginRequest) {
         Respond respond = new Respond();
 
@@ -115,8 +156,20 @@ public class UserService implements IUserService {
     @Override
     public Respond getUserBookingHistory(String userId) {
         Respond respond = new Respond();
-
         try {
+
+            String currentEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+            User currentUser = userRepository.findByEmail(currentEmail)
+                    .orElseThrow(() -> new OurException("Current User Not Found"));
+            Long currentUserId = currentUser.getId();
+
+            if (!currentUser.getRole().equalsIgnoreCase("ADMIN") &&
+                    !currentUserId.equals(Long.valueOf(userId))) {
+                respond.setStatusCode(403);
+                respond.setMessage("Access Denied");
+                return respond;
+            }
+
             User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(()-> new OurException("User Not Found"));
             UserDTO userDTO = Utils.mapUserEntityToUserDTOPlusUserBookingAndRoom(user);
 

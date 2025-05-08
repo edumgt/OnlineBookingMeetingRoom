@@ -950,7 +950,7 @@ h2 {
 /*Edit Booking*/
 
 
-.achieve-booking {
+.cancel-booking {
   margin: 10px auto;
   background-color: rgb(164, 16, 16);
   color: #fff;
@@ -958,7 +958,7 @@ h2 {
   font-weight: 800;
 }
 
-.achieve-booking:hover {
+.cancel-booking:hover {
   background-color: rgb(79, 14, 14);
 }
 

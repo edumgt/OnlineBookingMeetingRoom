@@ -7,12 +7,13 @@ import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.awt.print.Book;
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "bookings")
-public class Booking {
+public class Booking implements Comparable<Booking>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,5 +66,10 @@ public class Booking {
                 ", status='" + status + '\'' +
                 ", bookingConfirmationCode='" + bookingConfirmationCode + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Booking other) {
+        return this.startTime.compareTo(other.startTime);
     }
 }

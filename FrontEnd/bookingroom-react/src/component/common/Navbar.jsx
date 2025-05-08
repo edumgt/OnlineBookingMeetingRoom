@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
 import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 Modal.setAppElement('#root'); // 👈 Set root element for accessibility
 
@@ -15,12 +17,14 @@ function Navbar() {
 
     const handleLogout = () => {
         ApiService.logout();
+        toast.success("Log out successful!")
         setShowLogoutModal(false);
         navigate('/home');
     };
 
     return (
         <nav className="navbar">
+            <ToastContainer position="top-right" autoClose={5000} />
             <div className="navbar-brand">
                 <NavLink to="/home">Inno.C's Rooms</NavLink>
             </div>

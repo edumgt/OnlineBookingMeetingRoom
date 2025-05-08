@@ -25,15 +25,15 @@ const EditBookingPage = () => {
     }, [bookingCode]);
 
 
-    const achieveBooking = async (bookingId) => {
-        if (!window.confirm('Are you sure you want to Achieve this booking?')) {
+    const cancelBooking = async (bookingId) => {
+        if (!window.confirm('Are you sure you want to Cancel this booking?')) {
             return; // Do nothing if the user cancels
         }
 
         try {
             const response = await ApiService.cancelBooking(bookingId);
             if (response.statusCode === 200) {
-                toast.success("The booking was Successfully Achieved")
+                toast.success("The booking was Successfully Cancel")
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 
                 setTimeout(() => {
@@ -81,8 +81,8 @@ const EditBookingPage = () => {
                         <img src={bookingDetails.room.roomPhotoURL} alt="Room" className="room-photo" srcSet="" />
                     </div>
                     <button
-                        className="achieve-booking"
-                        onClick={() => achieveBooking(bookingDetails.id)}>Achieve Booking
+                        className="cancel-booking"
+                        onClick={() => cancelBooking(bookingDetails.id)}>Cancel Booking
                     </button>
                 </div>
             )}
