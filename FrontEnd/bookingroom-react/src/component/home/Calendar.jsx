@@ -1,37 +1,57 @@
-import { Calendar } from '@fullcalendar/core';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ApiService from '../../service/ApiService';
+
+import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
-let calendarEl = document.getElementById('calendar');
-let calendar = new Calendar(calendarEl, {
-  plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ],
-  initialView: 'dayGridMonth',
-  headerToolbar: {
-    left: 'prev,next today',
-    center: 'title',
-    right: 'dayGridMonth,timeGridWeek,listWeek'
-  }
-});
-calendar.render();
+const MyCalendarPage = () => {
+    const [user, setUser] = useState(null);
+    const [events, setEvents] = useState([]);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
-const Calendar = () =>{
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const response = await ApiService.getUserProfile();
+                const userPlusBookings = await ApiService.getUserBookings(response.user.id);
+                setUser(userPlusBookings.user);
 
+                // Chuyển bookings thành events của calendar
+                const transformedEvents = userPlusBookings.user.bookings.map(booking => ({
+                    title: booking.room.name,
+                    start: booking.startDateTime,
+                    end: booking.endDateTime,
+                }));
+                setEvents(transformedEvents);
+            } catch (error) {
+                setError(error.response?.data?.message || error.message);
+            }
+        };
 
-    return(
+        fetchUserProfile();
+    }, []);
+
+    return (
         <div>
+            <h2>Lịch đặt phòng của bạn</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <FullCalendar
-                plugins={[ dayGridPlugin ]}
+                plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
                 initialView="dayGridMonth"
-                weekends={false}
-                events={[
-                    { title: 'event 1', date: '2019-04-01' },
-                    { title: 'event 2', date: '2019-04-02' }
-            ]}
+                headerToolbar={{
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                }}
+                events={events}
+                height="auto"
             />
         </div>
-    )
-}
+    );
+};
 
-export default Calendar;
-
+export default MyCalendarPage;
