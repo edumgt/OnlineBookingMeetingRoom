@@ -58,7 +58,7 @@ const RoomSearch = ({ handleSearchResult }) => {
 
   return (
     <section>
-      <ToastContainer position="top-right" autoClose={5000} />
+      <ToastContainer position="top-right" autoClose={5000} closeOnClick/>
       <div className="search-container">
         <div className="search-field">
           <label>Start Time</label>

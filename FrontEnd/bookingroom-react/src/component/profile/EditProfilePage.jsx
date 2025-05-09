@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const EditProfilePage = () => {
     const [user, setUser] = useState(null);
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -13,7 +15,7 @@ const EditProfilePage = () => {
                 const response = await ApiService.getUserProfile();
                 setUser(response.user);
             } catch (error) {
-                setError(error.message);
+                toast.error(error.message);
             }
         };
 
@@ -28,14 +30,14 @@ const EditProfilePage = () => {
             await ApiService.deleteUser(user.id);
             navigate('/signup');
         } catch (error) {
-            setError(error.message);
+            toast.error(error.message);
         }
     };
 
     return (
         <div className="edit-profile-page">
+            <ToastContainer position="top-right" autoClose={5000} closeOnClick/>
             <h2>Edit Profile</h2>
-            {error && <p className="error-message">{error}</p>}
             {user && (
                 <div className="profile-details">
                     <p><strong>Name:</strong> {user.name}</p>

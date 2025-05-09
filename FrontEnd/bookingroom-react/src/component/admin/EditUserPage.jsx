@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const EditUserPage = () => {
     const { userId } = useParams();
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const [userDetails, setUserDetails] = useState({
         name: '',
@@ -15,6 +16,14 @@ const EditUserPage = () => {
         role: '',
         deviceInfo: '',
     });
+
+    const formData = new FormData();
+            formData.append('name', userDetails.name);
+            formData.append('password', userDetails.password);
+            formData.append('email', userDetails.email);
+            formData.append('phoneNumber', userDetails.phoneNumber);
+            formData.append('role', userDetails.role);
+            formData.append('deviceInfo', userDetails.deviceInfo);
     const [preview, setPreview] = useState(null);
 
     useEffect(() => {
@@ -45,18 +54,29 @@ const EditUserPage = () => {
     };
 
 
+    const isStrongPassword = (password) => {
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+        return regex.test(password);
+    };
 
+    const validateForm = () => {
+        const { name, email, password, phoneNumber } = formData;
+        return name && email && password && phoneNumber;
+    };
+    
     const handleUpdate = async () => {
         try {
-            const formData = new FormData();
-            formData.append('name', userDetails.name);
-            formData.append('password', userDetails.password);
-            formData.append('email', userDetails.email);
-            formData.append('phoneNumber', userDetails.phoneNumber);
-            formData.append('role', userDetails.role);
-            formData.append('deviceInfo', userDetails.deviceInfo);
 
             const result = await ApiService.updateUser(userId, formData);
+            if (!validateForm()) {
+                        toast.error('Please fill all the fields.');
+                        return;
+                    }
+        
+            if (!isStrongPassword(formData.password)) {
+                toast.error('Password must be at least 8 characters, include 1 uppercase, 1 lowercase, and 1 special character.');
+                return;
+            }
             if (result.statusCode === 200) {
                 toast.success('user updated successfully.');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -88,6 +108,8 @@ const EditUserPage = () => {
         }
     };
 
+    
+
     return (
         <div className="edit-room-container">
             <ToastContainer position="top-right" autoClose={5000} />
@@ -105,12 +127,13 @@ const EditUserPage = () => {
                 <div className="form-group">
                     <label>Password</label>
                     <input
-                        type="text"
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         value={userDetails.password}
                         onChange={handleChange}
                     />
                 </div>
+                <input type="checkbox" onClick={() => setShowPassword(!showPassword)}/>Show Password 
                 <div className="form-group">
                     <labelEmail></labelEmail>
                     <input

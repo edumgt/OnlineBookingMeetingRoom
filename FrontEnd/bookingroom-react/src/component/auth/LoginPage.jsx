@@ -66,20 +66,8 @@ function LoginPage() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        style={{
-                            paddingRight: "557px",
-                            background: "transparent",
-                            border: "none",
-                            cursor: "pointer",
-                            padding: 0,
-                        }}
-                    >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </button>
                 </div>
+                <input type="checkbox" onClick={() => setShowPassword(!showPassword)}/>Show Password 
                 <button type="submit" disabled={isLoading}>
                 {isLoading ? <ClipLoader size={20} color="#fff" /> : "Login"}
             </button>

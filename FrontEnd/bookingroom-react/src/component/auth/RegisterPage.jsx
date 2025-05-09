@@ -94,23 +94,11 @@ function RegisterPage() {
                         onChange={handleInputChange}
                         required
                     />
-                    <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        style={{
-                            paddingRight: "557px",
-                            background: "transparent",
-                            border: "none",
-                            cursor: "pointer",
-                            padding: 0,
-                        }}
-                    >
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </button>
                     <small style={{ fontSize: "12px", color: "#888" }}>
                         Must be at least 8 characters, include uppercase, lowercase, and special character.
                     </small>
                 </div>
+                <input type="checkbox" onClick={() => setShowPassword(!showPassword)}/>Show Password 
                 <button type="submit" disabled={isLoading}>
                     {isLoading ? <ClipLoader size={20} color="#fff" /> : "Register"}
                 </button>

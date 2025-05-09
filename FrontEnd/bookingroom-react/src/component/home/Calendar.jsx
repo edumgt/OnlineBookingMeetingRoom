@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ApiService from '../../service/ApiService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -8,27 +9,24 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
 const MyCalendarPage = () => {
-    const [user, setUser] = useState(null);
     const [events, setEvents] = useState([]);
-    const [error, setError] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
                 const response = await ApiService.getUserProfile();
                 const userPlusBookings = await ApiService.getUserBookings(response.user.id);
-                setUser(userPlusBookings.user);
+                const bookings = userPlusBookings.user.bookings || [];
 
-                // Chuyển bookings thành events của calendar
-                const transformedEvents = userPlusBookings.user.bookings.map(booking => ({
-                    title: booking.room.name,
+                const transformedEvents = bookings.map(booking => ({
+                    title: booking.room.name || 'No Room',
                     start: booking.startDateTime,
                     end: booking.endDateTime,
                 }));
+
                 setEvents(transformedEvents);
             } catch (error) {
-                setError(error.response?.data?.message || error.message);
+                toast.error(error.response?.data?.message || error.message);
             }
         };
 
@@ -36,9 +34,9 @@ const MyCalendarPage = () => {
     }, []);
 
     return (
-        <div>
-            <h2>Lịch đặt phòng của bạn</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+        <div className='calendar-page'>
+            <ToastContainer position="top-right" autoClose={5000} closeOnClick />
+            <h2>My Calendar</h2>
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
                 initialView="dayGridMonth"

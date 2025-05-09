@@ -24,7 +24,7 @@ function Navbar() {
 
     return (
         <nav className="navbar">
-            <ToastContainer position="top-right" autoClose={5000} />
+            <ToastContainer position="top-right" autoClose={5000} closeOnClick/>
             <div className="navbar-brand">
                 <NavLink to="/home">Inno.C's Rooms</NavLink>
             </div>
@@ -32,6 +32,7 @@ function Navbar() {
                 <li><NavLink to="/home" activeclassname="active">Home</NavLink></li>
                 <li><NavLink to="/rooms" activeclassname="active">Rooms</NavLink></li>
                 <li><NavLink to="/find-booking" activeclassname="active">Find my Booking</NavLink></li>
+                <li><NavLink to="/calendar" activeclassname="active">My Calendar</NavLink></li>
 
                 {isUser && <li><NavLink to="/profile" activeclassname="active">Profile</NavLink></li>}
                 {isAdmin && <li><NavLink to="/admin" activeclassname="active">Admin</NavLink></li>}
@@ -48,6 +49,8 @@ function Navbar() {
                 contentLabel="Confirm Logout"
                 className="modal-content"
                 overlayClassName="modal-overlay"
+                autoClose={5000}
+                closeOnClick
             >
                 <h3>Are you sure you want to logout?</h3>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>

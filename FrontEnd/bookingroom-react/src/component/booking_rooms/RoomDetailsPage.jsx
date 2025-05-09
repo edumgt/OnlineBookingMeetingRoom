@@ -113,7 +113,7 @@ const RoomDetailsPage = () => {
 
   return (
     <div className="room-details-booking">
-      <ToastContainer position="top-right" autoClose={5000} />
+      <ToastContainer position="top-right" autoClose={5000} closeOnClick/>
 
       <h2>Room Details</h2>
       <br />
