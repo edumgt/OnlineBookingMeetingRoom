@@ -63,7 +63,7 @@ export default class ApiService {
 
         /* This updates a user */
         static async updateUser(userId, formData) {
-            const result = await axios.put(`${this.BASE_URL}/users/edit-user/${userId}`, formData, {
+            const result = await axios.put(`${this.BASE_URL}/users/update-user/${userId}`, formData, {
                 headers: {
                     ...this.getHeader(),
                     'Content-Type': 'multipart/form-data'

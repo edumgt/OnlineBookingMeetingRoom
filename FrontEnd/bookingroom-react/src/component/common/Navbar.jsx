@@ -49,7 +49,7 @@ function Navbar() {
                 contentLabel="Confirm Logout"
                 className="modal-content"
                 overlayClassName="modal-overlay"
-                autoClose={5000}
+                autoClose={1000}
                 closeOnClick
             >
                 <h3>Are you sure you want to logout?</h3>
