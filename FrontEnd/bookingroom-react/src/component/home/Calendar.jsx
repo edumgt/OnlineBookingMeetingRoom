@@ -10,18 +10,22 @@ import listPlugin from '@fullcalendar/list';
 
 const MyCalendarPage = () => {
     const [events, setEvents] = useState([]);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
                 const response = await ApiService.getUserProfile();
                 const userPlusBookings = await ApiService.getUserBookings(response.user.id);
-                const bookings = userPlusBookings.user.bookings || [];
+                
+                setUser(userPlusBookings.user);
 
-                const transformedEvents = bookings.map(booking => ({
-                    title: booking.room.name || 'No Room',
-                    start: booking.startDateTime,
-                    end: booking.endDateTime,
+                const transformedEvents = userPlusBookings.user.bookings.map(booking => ({
+                    
+
+                    title: booking.title,
+                    start: booking.startTime,
+                    end: booking.endTime,
                 }));
 
                 setEvents(transformedEvents);
@@ -33,10 +37,11 @@ const MyCalendarPage = () => {
         fetchUserProfile();
     }, []);
 
+
     return (
         <div className='calendar-page'>
             <ToastContainer position="top-right" autoClose={5000} closeOnClick />
-            <h2>My Calendar</h2>
+            <h2>{user ? `${user.name}'s Calendar` : 'Loading Calendar...'}</h2>
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
                 initialView="dayGridMonth"
@@ -45,6 +50,7 @@ const MyCalendarPage = () => {
                     center: 'title',
                     right: 'dayGridMonth,timeGridWeek,listWeek'
                 }}
+                displayEventEnd={true}
                 events={events}
                 height="auto"
             />

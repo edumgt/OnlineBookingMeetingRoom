@@ -19,10 +19,13 @@ const EditUserPage = () => {
     deviceInfo: ''
   });
 
+  const [originalEmail, setOriginalEmail] = useState("");
+
   useEffect(() => {
     (async () => {
       try {
         const { user } = await ApiService.getUser(userId);
+        setOriginalEmail(user.email);
         setUserDetails({
           name: user.name,
           password: '',           // never prefill the hashed password
@@ -62,13 +65,19 @@ const EditUserPage = () => {
     // Build a fresh FormData
     const data = new FormData();
     data.append('name', name);
-    data.append('email', email);
     data.append('phoneNumber', phoneNumber);
     data.append('role', role);
     data.append('deviceInfo', deviceInfo);
-    if (password) {
-      data.append('password', password); // only if user typed a new one
+
+    // Only send email if changed
+    if (email !== originalEmail) {
+        data.append("email", email);
     }
+    // only if user typed a new one
+    if (password) {
+      data.append('password', password); 
+    }
+    
 
     try {
       const result = await ApiService.updateUser(userId, data);

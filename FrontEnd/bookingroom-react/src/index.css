@@ -198,7 +198,7 @@ button[type="submit"]:hover {
 
 /* The header banner */
 .header-banner {
-  /* background-image: url("../public/assets/images/hotel.webp"); */
+  background-image: url("../public/assets/images/home.webp");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -209,6 +209,7 @@ button[type="submit"]:hover {
   position: relative;
   height: 500px;
 }
+
 
 .header-banner h1 {
   font-size: 50px;

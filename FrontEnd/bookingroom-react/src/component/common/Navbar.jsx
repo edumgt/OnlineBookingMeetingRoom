@@ -18,8 +18,10 @@ function Navbar() {
     const handleLogout = () => {
         ApiService.logout();
         toast.success("Log out successful!")
-        setShowLogoutModal(false);
+        const timer = setTimeout(() => setShowLogoutModal(false), 1000);
         navigate('/home');
+        return () => clearTimeout(timer);
+        
     };
 
     return (
@@ -49,7 +51,6 @@ function Navbar() {
                 contentLabel="Confirm Logout"
                 className="modal-content"
                 overlayClassName="modal-overlay"
-                autoClose={1000}
                 closeOnClick
             >
                 <h3>Are you sure you want to logout?</h3>

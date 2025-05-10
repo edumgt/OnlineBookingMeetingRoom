@@ -19,7 +19,6 @@ const HomePage = () => {
             {/* HEADER / BANNER ROOM SECTION */}
             <section>
                 <header className="header-banner">
-                    <img src="./assets/images/hotel.webp" alt="Inno.C's Rooms" className="header-image" />
                     <div className="overlay"></div>
                     <div className="animated-texts overlay-content">
                         <h1>
